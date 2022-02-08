@@ -17,4 +17,19 @@ class ParkingSpotService implements ParkingSpotPortIn {
         parkingSpot.created();
         return this.parkingSpotPortOut.saveParkingSpot(parkingSpot);
     }
+
+    @Override
+    public boolean existsByLicensePlateCar(String licensePlateCar) {
+        return this.parkingSpotPortOut.existsByLicensePlateCar(licensePlateCar);
+    }
+
+    @Override
+    public boolean existsByParkingSpotNumber(String parkingSpotNumber) {
+        return this.parkingSpotPortOut.existsByParkingSpotNumber(parkingSpotNumber);
+    }
+
+    @Override
+    public boolean existsByApartmentAndBlock(String apartment, String block) {
+        return this.parkingSpotPortOut.existsByApartmentAndBlock(apartment, block);
+    }
 }

@@ -4,5 +4,5 @@ import com.ms.parkingcontrol.adapters.dto.ParkingSpotDto;
 import org.springframework.http.ResponseEntity;
 
 public interface ParkingSpotController {
-    ResponseEntity<Void> saveParkingSpot(ParkingSpotDto parkingSpotDto);
+    ResponseEntity<Object> saveParkingSpot(ParkingSpotDto parkingSpotDto);
 }

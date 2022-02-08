@@ -16,4 +16,19 @@ class MongoParkingSpotOut implements ParkingSpotPortOut {
     public ParkingSpot saveParkingSpot(ParkingSpot parkingSpot) {
         return this.mongoParkingSpot.save(parkingSpot);
     }
+
+    @Override
+    public boolean existsByLicensePlateCar(String licensePlateCar) {
+        return this.mongoParkingSpot.existsByLicensePlateCar(licensePlateCar);
+    }
+
+    @Override
+    public boolean existsByApartmentAndBlock(String apartment, String block) {
+        return this.mongoParkingSpot.existsByApartmentAndBlock(apartment, block);
+    }
+
+    @Override
+    public boolean existsByParkingSpotNumber(String parkingSpotNumber) {
+        return this.mongoParkingSpot.existsByParkingSpotNumber(parkingSpotNumber);
+    }
 }
