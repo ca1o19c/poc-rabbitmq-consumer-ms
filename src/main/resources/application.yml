@@ -1,0 +1,37 @@
+server:
+  port: ${port:8080}
+
+logging:
+    level:
+        data:
+            mongodb:
+                core:
+                    MongoTemplate: DEBUG
+                repository:
+                    Query: DEBUG
+
+springdoc:
+    api-docs:
+        enabled: true
+        writer-with-default-pretty-printer: true
+
+spring:
+    main:
+        banner-mode: "off"
+    application:
+        name: ${name:parking-control}
+    jackson:
+        property-naming-strategy: SNAKE_CASE
+        default-property-inclusion: NON_NULL
+    profiles:
+        active: ${profiles_active:local}
+    data:
+        mongodb:
+          uri: mongodb://localhost:27017/parking-control
+          database: parking-control
+          field-naming-strategy: org.springframework.data.mapping.model.SnakeCaseFieldNamingStrategy
+
+management:
+    endpoint:
+        health:
+            show-details: "ALWAYS"
