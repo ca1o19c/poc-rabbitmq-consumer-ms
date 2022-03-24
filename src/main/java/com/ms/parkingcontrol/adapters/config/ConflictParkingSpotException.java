@@ -1,4 +1,4 @@
-package com.ms.parkingcontrol.adapters.in.parkingmanagement.config;
+package com.ms.parkingcontrol.adapters.config;
 
 public class ConflictParkingSpotException extends RuntimeException {
     public ConflictParkingSpotException(String message) {

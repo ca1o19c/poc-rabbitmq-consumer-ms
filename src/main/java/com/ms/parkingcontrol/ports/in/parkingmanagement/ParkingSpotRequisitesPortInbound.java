@@ -1,6 +1,6 @@
 package com.ms.parkingcontrol.ports.in.parkingmanagement;
 
-import com.ms.parkingcontrol.adapters.in.parkingmanagement.config.ConflictParkingSpotException;
+import com.ms.parkingcontrol.adapters.config.ConflictParkingSpotException;
 
 public interface ParkingSpotRequisitesPortInbound {
     void verifyLicensePlateCar(String licensePlateCar) throws ConflictParkingSpotException;
