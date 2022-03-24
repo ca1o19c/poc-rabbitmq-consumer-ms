@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ms</groupId>
-	<artifactId>parking-control</artifactId>
+	<artifactId>parking-control-ms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>parking-control</name>
+	<name>parking-control-ms</name>
 	<description>Parking Management Endpoints</description>
 	<properties>
 		<java.version>11</java.version>
@@ -43,7 +43,7 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.6.5</version>
+			<version>1.6.6</version>
 		</dependency>
 	</dependencies>
 
@@ -73,10 +73,6 @@
 						<version>${spring-restdocs.version}</version>
 					</dependency>
 				</dependencies>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
