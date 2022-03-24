@@ -20,7 +20,7 @@ public class ParkingSpotControllerImpl implements ParkingSpotController {
     private ParkingSpotFacadePortInbound parkingSpotPortInbound;
 
     @Autowired
-    MongoOperationsPortInbound mongoOperationsPortInbound;
+    private MongoOperationsPortInbound mongoOperationsPortInbound;
 
     @Override
     @PostMapping
@@ -39,7 +39,6 @@ public class ParkingSpotControllerImpl implements ParkingSpotController {
                 .withRegistrationDate()
                 .build();
 
-
         ParkingSpotResponse entity = ParkingSpotResponse
                 .from(parkingSpotPortInbound.saveParkingSpotFacade(parkingSpot));
 
@@ -48,7 +47,7 @@ public class ParkingSpotControllerImpl implements ParkingSpotController {
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getParkingSpot(@RequestParam UUID id) {
+    public ResponseEntity<Object> getParkingSpot(@PathVariable UUID id) {
         ParkingSpotResponse entity = ParkingSpotResponse
                 .from(mongoOperationsPortInbound.getParkingSpot(id));
 
