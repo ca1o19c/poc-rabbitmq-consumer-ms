@@ -2,12 +2,12 @@ package com.ms.parkingcontrol.application.parkingmanagement;
 
 import com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpot;
 import com.ms.parkingcontrol.ports.in.parkingmanagement.MongoOperationsPortInbound;
-import com.ms.parkingcontrol.ports.in.parkingmanagement.ParkingSpotPortInbound;
+import com.ms.parkingcontrol.ports.in.parkingmanagement.ParkingSpotFacadePortInbound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-class ParkingSpotFacade implements ParkingSpotPortInbound {
+class ParkingSpotFacade implements ParkingSpotFacadePortInbound {
 
     @Autowired
     private ParkingSpotRequisites parkingSpotRequisites;

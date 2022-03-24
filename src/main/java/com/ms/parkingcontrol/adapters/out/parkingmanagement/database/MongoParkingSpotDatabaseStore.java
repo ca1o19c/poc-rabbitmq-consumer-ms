@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 class MongoParkingSpotDatabaseStore implements MongoDatabaseStorePortOutbound {
@@ -32,6 +33,13 @@ class MongoParkingSpotDatabaseStore implements MongoDatabaseStorePortOutbound {
         parkingSpotDocument.setResponsibleName(parkingSpot.getResponsibleName());
 
         return mongoTemplate.save(parkingSpotDocument);
+    }
+
+    @Override
+    public Optional<ParkingSpot> getParkingSpot(UUID id) {
+        Query query = new Query(Criteria.where("id").is(id));
+
+        return Optional.ofNullable(mongoTemplate.findOne(query, ParkingSpot.class));
     }
 
     @Override

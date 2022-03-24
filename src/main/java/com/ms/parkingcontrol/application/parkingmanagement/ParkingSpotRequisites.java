@@ -1,6 +1,6 @@
 package com.ms.parkingcontrol.application.parkingmanagement;
 
-import com.ms.parkingcontrol.adapters.in.parkingmanagement.config.ConflictParkingSpotException;
+import com.ms.parkingcontrol.adapters.config.ConflictParkingSpotException;
 import com.ms.parkingcontrol.ports.in.parkingmanagement.MongoOperationsPortInbound;
 import com.ms.parkingcontrol.ports.in.parkingmanagement.ParkingSpotRequisitesPortInbound;
 import org.springframework.beans.factory.annotation.Autowired;
