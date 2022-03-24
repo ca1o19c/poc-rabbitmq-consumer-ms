@@ -1,9 +1,11 @@
-package com.ms.parkingcontrol.adapters.in.parkingmanagement.config;
+package com.ms.parkingcontrol.adapters.config;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorResponse {
     private final String message;
     private final int code;
