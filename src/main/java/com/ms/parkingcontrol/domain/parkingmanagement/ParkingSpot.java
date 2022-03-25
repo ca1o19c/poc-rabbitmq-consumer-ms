@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class ParkingSpot {
 
-    private UUID id;
+    private String id;
     private String parkingSpotNumber;
     private String licensePlateCar;
     private String brandCar;
@@ -16,7 +16,7 @@ public class ParkingSpot {
     private String apartment;
     private String block;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
@@ -61,7 +61,7 @@ public class ParkingSpot {
     }
 
     public static final class Builder {
-        private UUID id;
+        private String id;
         private String parkingSpotNumber;
         private String licensePlateCar;
         private String brandCar;
@@ -73,11 +73,11 @@ public class ParkingSpot {
         private String block;
 
         public Builder withId() {
-            this.id = UUID.randomUUID();
+            this.id = UUID.randomUUID().toString();
             return this;
         }
 
-        public Builder withId(UUID id) {
+        public Builder withId(String id) {
             this.id = id;
             return this;
         }

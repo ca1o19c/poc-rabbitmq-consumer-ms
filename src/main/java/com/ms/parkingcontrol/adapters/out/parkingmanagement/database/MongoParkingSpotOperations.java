@@ -24,7 +24,7 @@ class MongoParkingSpotOperations implements MongoOperationsPortInbound {
     }
 
     @Override
-    public com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpot getParkingSpot(UUID id) {
+    public com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpot getParkingSpot(String id) {
         Optional<ParkingSpot> parkingSpotOptional = mongoDatabaseStorePortOutbound.getParkingSpot(id);
 
         if (!parkingSpotOptional.isPresent())

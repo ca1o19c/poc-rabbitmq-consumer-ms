@@ -36,7 +36,7 @@ class MongoParkingSpotDatabaseStore implements MongoDatabaseStorePortOutbound {
     }
 
     @Override
-    public Optional<ParkingSpot> getParkingSpot(UUID id) {
+    public Optional<ParkingSpot> getParkingSpot(String id) {
         Query query = new Query(Criteria.where("id").is(id));
 
         return Optional.ofNullable(mongoTemplate.findOne(query, ParkingSpot.class));

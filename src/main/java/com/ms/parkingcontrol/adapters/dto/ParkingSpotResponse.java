@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class ParkingSpotResponse {
-    private UUID id;
+    private String id;
     @JsonProperty("parking_spot_number")
     private String parkingSpotNumber;
     @JsonProperty("license_plate_car")
@@ -25,7 +25,7 @@ public class ParkingSpotResponse {
     private String apartment;
     private String block;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
@@ -70,7 +70,7 @@ public class ParkingSpotResponse {
     }
 
     public static final class Builder {
-        private UUID id;
+        private String id;
         private String parkingSpotNumber;
         private String licensePlateCar;
         private String brandCar;
@@ -81,7 +81,7 @@ public class ParkingSpotResponse {
         private String apartment;
         private String block;
 
-        public Builder withId(UUID id) {
+        public Builder withId(String id) {
             this.id = id;
             return this;
         }
