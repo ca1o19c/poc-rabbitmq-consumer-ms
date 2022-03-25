@@ -10,5 +10,5 @@ public interface MongoOperationsPortInbound {
     String findByApartment(String apartment);
     String findByBlock(String block);
     ParkingSpot saveParkingSpot(ParkingSpot parkingSpot);
-    ParkingSpot getParkingSpot(UUID id);
+    ParkingSpot getParkingSpot(String id);
 }
