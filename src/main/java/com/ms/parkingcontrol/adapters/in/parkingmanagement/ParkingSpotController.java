@@ -31,15 +31,15 @@ public class ParkingSpotController {
 
 
     @GetMapping
-    public ResponseEntity<Object> getAllParkingSpots(@RequestParam(required = false, value = "parking_spot_number") String parkingSpotNumber,
-                                                     @RequestParam(required = false, value = "license_plate_car") String licensePlateCar,
-                                                     @RequestParam(required = false, value = "responsible_name") String responsibleName,
-                                                     @RequestParam(required = false, value = "brand_car") String brandCar,
-                                                     @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
-                                                     @RequestParam(value = "per_page", required = false, defaultValue = "50") Integer perPage,
-                                                     @RequestParam(value = "dir", defaultValue = "asc", required = false) String sortType,
-                                                     @RequestParam(value = "initial_date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate initialDate,
-                                                     @RequestParam(value = "final_date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate finalDate) {
+    public ResponseEntity<PageResponse<ParkingSpotResponse>> getAllParkingSpots(@RequestParam(required = false, value = "parking_spot_number") String parkingSpotNumber,
+                                                                                @RequestParam(required = false, value = "license_plate_car") String licensePlateCar,
+                                                                                @RequestParam(required = false, value = "responsible_name") String responsibleName,
+                                                                                @RequestParam(required = false, value = "brand_car") String brandCar,
+                                                                                @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+                                                                                @RequestParam(value = "per_page", required = false, defaultValue = "50") Integer perPage,
+                                                                                @RequestParam(value = "dir", defaultValue = "asc", required = false) String sortType,
+                                                                                @RequestParam(value = "initial_date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate initialDate,
+                                                                                @RequestParam(value = "final_date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate finalDate) {
 
         ParkingSpotSearch parkingSpotSearch = ParkingSpotSearch.builder()
                 .withBrandCar(brandCar)
@@ -61,14 +61,14 @@ public class ParkingSpotController {
                 .map(ParkingSpotResponse::from)
                 .collect(Collectors.toList());
 
-        PageResponse<ParkingSpotResponse> parkingSpotResponsePage= new PageResponse<>(
+        PageResponse<ParkingSpotResponse> parkingSpotResponsePage = new PageResponse<>(
                 parkingSpotResponses, parkingSpotSearch.getPage(), parkingSpotSearch.getPerPage(), filteredParkingSpot.getTotal(), filteredParkingSpot.getTotalPages());
 
         return ResponseEntity.ok(parkingSpotResponsePage);
     }
 
     @PostMapping
-    public ResponseEntity<Object> saveParkingSpot(@Valid @RequestBody ParkingSpotRequest parkingSpotRequest) {
+    public ResponseEntity<ParkingSpotResponse> saveParkingSpot(@Valid @RequestBody ParkingSpotRequest parkingSpotRequest) {
 
         ParkingSpot parkingSpot = ParkingSpot.builder()
                 .withId()
@@ -90,7 +90,7 @@ public class ParkingSpotController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getParkingSpot(@PathVariable String id) {
+    public ResponseEntity<ParkingSpotResponse> getParkingSpot(@PathVariable String id) {
         ParkingSpotResponse entity = ParkingSpotResponse
                 .from(parkingSpotPortInbound.getParkingSpot(id));
 
