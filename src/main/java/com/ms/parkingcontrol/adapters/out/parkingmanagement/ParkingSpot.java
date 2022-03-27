@@ -1,15 +1,14 @@
 package com.ms.parkingcontrol.adapters.out.parkingmanagement;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Document("parking-spot")
 public class ParkingSpot {
 
-    @MongoId
+    @Id
     private String id;
     private String parkingSpotNumber;
     private String licensePlateCar;
