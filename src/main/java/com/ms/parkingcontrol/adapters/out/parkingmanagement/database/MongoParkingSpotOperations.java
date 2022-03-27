@@ -24,9 +24,7 @@ class MongoParkingSpotOperations implements MongoOperationsPortInbound {
     public com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpot saveParkingSpot(com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpot parkingSpot) {
         ParkingSpot parkingSpotDocument = mongoDatabaseStorePortOutbound.saveParkingSpot(parkingSpot);
 
-        com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpot parkingSpot1 = buildParkingSpotEntity(parkingSpotDocument);
-
-        return parkingSpot1;
+        return buildParkingSpotEntity(parkingSpotDocument);
     }
 
     @Override
