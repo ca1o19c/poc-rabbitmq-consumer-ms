@@ -1,8 +1,8 @@
 package com.ms.parkingcontrol.application.parkingmanagement;
 
 import com.ms.parkingcontrol.adapters.config.ConflictParkingSpotException;
-import com.ms.parkingcontrol.ports.in.parkingmanagement.MongoOperationsPortInbound;
 import com.ms.parkingcontrol.ports.in.parkingmanagement.ParkingSpotRequisitesPortInbound;
+import com.ms.parkingcontrol.ports.out.parkingmanagement.ParkingSpotStoreDatabasePortOutbound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 class ParkingSpotRequisites implements ParkingSpotRequisitesPortInbound {
 
     @Autowired
-    private MongoOperationsPortInbound mongoOperationsPortInbound;
+    private ParkingSpotStoreDatabasePortOutbound mongoDatabaseStorePortOutbound;
 
     @Override
     public void verifyLicensePlateCar(String licensePlateCar) throws ConflictParkingSpotException {
-        String byLicensePlateCar = mongoOperationsPortInbound.findByLicensePlateCar(licensePlateCar);
+        String byLicensePlateCar = mongoDatabaseStorePortOutbound.findByLicensePlateCar(licensePlateCar);
 
         if (byLicensePlateCar != null)
             throw new ConflictParkingSpotException("License Plate Car is already in use.");
@@ -22,15 +22,15 @@ class ParkingSpotRequisites implements ParkingSpotRequisitesPortInbound {
 
     @Override
     public void verifyParkingSpotNumber(String parkingSpotNumber) throws ConflictParkingSpotException {
-        String byParkingSpotNumber = mongoOperationsPortInbound.findByParkingSpotNumber(parkingSpotNumber);
+        String byParkingSpotNumber = mongoDatabaseStorePortOutbound.findByParkingSpotNumber(parkingSpotNumber);
 
         if (byParkingSpotNumber != null)
             throw new ConflictParkingSpotException("Parking Spot is already in use.");
     }
 
     public void verifyApartmentAndBlock(String apartment, String block) throws ConflictParkingSpotException {
-        String byApartment = mongoOperationsPortInbound.findByApartment(apartment);
-        String byBlock = mongoOperationsPortInbound.findByBlock(block);
+        String byApartment = mongoDatabaseStorePortOutbound.findByApartment(apartment);
+        String byBlock = mongoDatabaseStorePortOutbound.findByBlock(block);
 
         if (byApartment != null || byBlock != null)
             throw new ConflictParkingSpotException("Parking Spot already registered for this apartment/block.");
