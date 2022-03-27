@@ -4,7 +4,7 @@ import com.ms.parkingcontrol.adapters.out.parkingmanagement.ParkingSpot;
 import com.ms.parkingcontrol.adapters.out.parkingmanagement.ResearchedParkingSpot;
 import com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpotSearch;
 import com.ms.parkingcontrol.domain.parkingmanagement.SortType;
-import com.ms.parkingcontrol.ports.out.parkingmanagement.MongoDatabaseStorePortOutbound;
+import com.ms.parkingcontrol.ports.out.parkingmanagement.MongoParkingSpotDBOperationsPortOutbound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -24,13 +24,12 @@ import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @Component
-class MongoParkingSpotDatabaseStore implements MongoDatabaseStorePortOutbound {
+class MongoParkingSpotDBParkingSpotDBOperations implements MongoParkingSpotDBOperationsPortOutbound {
 
     private static final String REGISTRATION_DATE_PROPERTY = "registration_date";
     private static final String BRAND_CAR_PROPERTY = "brand_car";
     private static final String PARKING_SPOT_NUMBER_PROPERTY = "parking_spot_number";
     private static final String ID_PROPERTY = "id";
-
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -66,19 +65,21 @@ class MongoParkingSpotDatabaseStore implements MongoDatabaseStorePortOutbound {
 
         int page = parkingSpotSearch.getPage();
 
-        int perPage = parkingSpotSearch.getPerPage();
+        int limit = parkingSpotSearch.getPerPage();
+
+        int total = Math.toIntExact(mongoTemplate.count(query, ParkingSpot.class));
+
+        int totalPages = total > limit ? Math.floorDiv(total, limit) : 1;
 
         Sort.Direction direction = Sort.Direction.fromString(
                 isEmpty(parkingSpotSearch.getSortType()) ? SortType.ASC.getValue()
                         : parkingSpotSearch.getSortType().getValue());
 
-        int total = Math.toIntExact(mongoTemplate.count(query, ParkingSpot.class));
-
-        query.with(PageRequest.of(page, perPage, Sort.by(direction, REGISTRATION_DATE_PROPERTY)));
+        query.with(PageRequest.of(page, limit, Sort.by(direction, REGISTRATION_DATE_PROPERTY)));
 
         List<ParkingSpot> books = mongoTemplate.find(query, ParkingSpot.class);
 
-        return new ResearchedParkingSpot(total, books);
+        return new ResearchedParkingSpot(total, totalPages, books);
     }
 
     @Override

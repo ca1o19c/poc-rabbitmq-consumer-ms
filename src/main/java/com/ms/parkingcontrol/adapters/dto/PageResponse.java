@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.List;
 
-@JsonPropertyOrder({"page", "per_page", "total", "data"})
+@JsonPropertyOrder({"page", "per_page", "total_pages", "total", "data"})
 public class PageResponse<ParkingSpotResponse> {
 
     private final Integer page;
@@ -13,17 +13,20 @@ public class PageResponse<ParkingSpotResponse> {
     @JsonProperty("per_page")
     private final Integer perPage;
 
+    @JsonProperty("total_pages")
+    private final Integer totalPages;
+
     private final Integer total;
 
     @JsonProperty("data")
     private final List<ParkingSpotResponse> parkingSpotResponses;
 
-
-    public PageResponse(List<ParkingSpotResponse> books, Integer page, Integer perPage, Integer total) {
+    public PageResponse(List<ParkingSpotResponse> books, Integer page, Integer perPage, Integer total,  Integer totalPages) {
         this.parkingSpotResponses = books;
         this.page = page;
         this.perPage = perPage;
         this.total = total;
+        this.totalPages = totalPages;
     }
 
     public List<ParkingSpotResponse> getParkingSpotResponses() {
@@ -40,5 +43,9 @@ public class PageResponse<ParkingSpotResponse> {
 
     public Integer getTotal() {
         return total;
+    }
+
+    public Integer getTotalPages() {
+        return totalPages;
     }
 }
