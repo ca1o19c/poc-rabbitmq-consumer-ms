@@ -1,19 +1,19 @@
 package com.ms.parkingcontrol.application.parkingmanagement;
 
 import com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpot;
-import com.ms.parkingcontrol.ports.in.parkingmanagement.MongoOperationsPortInbound;
 import com.ms.parkingcontrol.ports.in.parkingmanagement.ParkingSpotFacadePortInbound;
+import com.ms.parkingcontrol.ports.out.parkingmanagement.ParkingSpotStoreDatabasePortOutbound;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 class ParkingSpotFacade implements ParkingSpotFacadePortInbound {
 
     @Autowired
     private ParkingSpotRequisites parkingSpotRequisites;
 
     @Autowired
-    private MongoOperationsPortInbound mongoOperationsPortInbound;
+    private ParkingSpotStoreDatabasePortOutbound mongoDatabaseStorePortOutbound;
 
     @Override
     public ParkingSpot saveParkingSpotFacade(ParkingSpot parkingSpot) {
@@ -24,6 +24,6 @@ class ParkingSpotFacade implements ParkingSpotFacadePortInbound {
 
         parkingSpotRequisites.verifyApartmentAndBlock(parkingSpot.getApartment(), parkingSpot.getBlock());
 
-        return mongoOperationsPortInbound.saveParkingSpot(parkingSpot);
+        return mongoDatabaseStorePortOutbound.saveParkingSpot(parkingSpot);
     }
 }
