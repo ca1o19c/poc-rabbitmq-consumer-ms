@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpot;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 public class ParkingSpotResponse {
     private String id;
