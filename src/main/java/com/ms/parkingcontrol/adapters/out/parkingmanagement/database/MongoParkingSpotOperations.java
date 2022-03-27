@@ -2,13 +2,17 @@ package com.ms.parkingcontrol.adapters.out.parkingmanagement.database;
 
 import com.ms.parkingcontrol.adapters.config.ParkingSpotNotFoundException;
 import com.ms.parkingcontrol.adapters.out.parkingmanagement.ParkingSpot;
+import com.ms.parkingcontrol.adapters.out.parkingmanagement.ResearchedParkingSpot;
+import com.ms.parkingcontrol.domain.parkingmanagement.FilteredParkingSpot;
+import com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpotSearch;
 import com.ms.parkingcontrol.ports.in.parkingmanagement.MongoOperationsPortInbound;
 import com.ms.parkingcontrol.ports.out.parkingmanagement.MongoDatabaseStorePortOutbound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Component
 class MongoParkingSpotOperations implements MongoOperationsPortInbound {
@@ -20,7 +24,9 @@ class MongoParkingSpotOperations implements MongoOperationsPortInbound {
     public com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpot saveParkingSpot(com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpot parkingSpot) {
         ParkingSpot parkingSpotDocument = mongoDatabaseStorePortOutbound.saveParkingSpot(parkingSpot);
 
-        return buildParkingSpotEntity(parkingSpotDocument);
+        com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpot parkingSpot1 = buildParkingSpotEntity(parkingSpotDocument);
+
+        return parkingSpot1;
     }
 
     @Override
@@ -31,6 +37,28 @@ class MongoParkingSpotOperations implements MongoOperationsPortInbound {
             throw new ParkingSpotNotFoundException("Parking spot not found.");
 
         return buildParkingSpotEntity(parkingSpotOptional.get());
+    }
+
+    @Override
+    public FilteredParkingSpot getAllParkingSpots(ParkingSpotSearch parkingSpotSearch) {
+        ResearchedParkingSpot parkingSpots = mongoDatabaseStorePortOutbound.getAll(parkingSpotSearch);
+
+        return buildParkingSpotsAggregate(parkingSpots);
+    }
+
+    private FilteredParkingSpot buildParkingSpotsAggregate(ResearchedParkingSpot parkingSpots) {
+
+        List<com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpot> parkingSpotList = new ArrayList<>();
+
+
+        parkingSpots.getResult().forEach(parkingSpot ->
+                parkingSpotList.add(buildParkingSpotEntity(parkingSpot))
+        );
+
+        return FilteredParkingSpot.builder()
+                .withParkingSpots(parkingSpotList)
+                .withTotal(parkingSpots.getTotal())
+                .build();
     }
 
     @Override
