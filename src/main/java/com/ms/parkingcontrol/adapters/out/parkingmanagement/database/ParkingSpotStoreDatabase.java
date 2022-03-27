@@ -5,8 +5,8 @@ import com.ms.parkingcontrol.adapters.out.parkingmanagement.ParkingSpot;
 import com.ms.parkingcontrol.adapters.out.parkingmanagement.ResearchedParkingSpot;
 import com.ms.parkingcontrol.domain.parkingmanagement.FilteredParkingSpot;
 import com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpotSearch;
-import com.ms.parkingcontrol.ports.in.parkingmanagement.MongoOperationsPortInbound;
-import com.ms.parkingcontrol.ports.out.parkingmanagement.MongoDatabaseStorePortOutbound;
+import com.ms.parkingcontrol.ports.out.parkingmanagement.MongoParkingSpotDBOperationsPortOutbound;
+import com.ms.parkingcontrol.ports.out.parkingmanagement.ParkingSpotStoreDatabasePortOutbound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,21 +15,21 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-class MongoParkingSpotOperations implements MongoOperationsPortInbound {
+class ParkingSpotStoreDatabase implements ParkingSpotStoreDatabasePortOutbound {
 
     @Autowired
-    private MongoDatabaseStorePortOutbound mongoDatabaseStorePortOutbound;
+    private MongoParkingSpotDBOperationsPortOutbound mongoParkingSpotDBOperationsPortOutbound;
 
     @Override
     public com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpot saveParkingSpot(com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpot parkingSpot) {
-        ParkingSpot parkingSpotDocument = mongoDatabaseStorePortOutbound.saveParkingSpot(parkingSpot);
+        ParkingSpot parkingSpotDocument = mongoParkingSpotDBOperationsPortOutbound.saveParkingSpot(parkingSpot);
 
         return buildParkingSpotEntity(parkingSpotDocument);
     }
 
     @Override
     public com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpot getParkingSpot(String id) {
-        Optional<ParkingSpot> parkingSpotOptional = mongoDatabaseStorePortOutbound.getParkingSpot(id);
+        Optional<ParkingSpot> parkingSpotOptional = mongoParkingSpotDBOperationsPortOutbound.getParkingSpot(id);
 
         if (!parkingSpotOptional.isPresent())
             throw new ParkingSpotNotFoundException("Parking spot not found.");
@@ -39,7 +39,7 @@ class MongoParkingSpotOperations implements MongoOperationsPortInbound {
 
     @Override
     public FilteredParkingSpot getAllParkingSpots(ParkingSpotSearch parkingSpotSearch) {
-        ResearchedParkingSpot parkingSpots = mongoDatabaseStorePortOutbound.getAll(parkingSpotSearch);
+        ResearchedParkingSpot parkingSpots = mongoParkingSpotDBOperationsPortOutbound.getAll(parkingSpotSearch);
 
         return buildParkingSpotsAggregate(parkingSpots);
     }
@@ -56,33 +56,34 @@ class MongoParkingSpotOperations implements MongoOperationsPortInbound {
         return FilteredParkingSpot.builder()
                 .withParkingSpots(parkingSpotList)
                 .withTotal(parkingSpots.getTotal())
+                .withTotalPages(parkingSpots.getTotalPages())
                 .build();
     }
 
     @Override
     public String findByLicensePlateCar(String licensePlateCar) {
-        ParkingSpot parkingSpot = mongoDatabaseStorePortOutbound.searchByLicensePlateCar(licensePlateCar).orElse(new ParkingSpot());
+        ParkingSpot parkingSpot = mongoParkingSpotDBOperationsPortOutbound.searchByLicensePlateCar(licensePlateCar).orElse(new ParkingSpot());
 
         return parkingSpot.getLicensePlateCar();
     }
 
     @Override
     public String findByParkingSpotNumber(String parkingSpotNumber) {
-        ParkingSpot parkingSpot = mongoDatabaseStorePortOutbound.searchByParkingSpotNumber(parkingSpotNumber).orElse(new ParkingSpot());
+        ParkingSpot parkingSpot = mongoParkingSpotDBOperationsPortOutbound.searchByParkingSpotNumber(parkingSpotNumber).orElse(new ParkingSpot());
 
         return parkingSpot.getParkingSpotNumber();
     }
 
     @Override
     public String findByApartment(String apartment) {
-        ParkingSpot parkingSpot = mongoDatabaseStorePortOutbound.searchByApartment(apartment).orElse(new ParkingSpot());
+        ParkingSpot parkingSpot = mongoParkingSpotDBOperationsPortOutbound.searchByApartment(apartment).orElse(new ParkingSpot());
 
         return parkingSpot.getApartment();
     }
 
     @Override
     public String findByBlock(String block) {
-        ParkingSpot parkingSpot = mongoDatabaseStorePortOutbound.searchByBlock(block).orElse(new ParkingSpot());
+        ParkingSpot parkingSpot = mongoParkingSpotDBOperationsPortOutbound.searchByBlock(block).orElse(new ParkingSpot());
 
         return parkingSpot.getBlock();
     }
