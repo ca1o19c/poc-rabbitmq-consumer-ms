@@ -1,28 +1,24 @@
 server:
-  port: ${port:8080}
-
+  port: ${PORT:8080}
 logging:
-    level:
-        data:
-            mongodb:
-                core:
-                    MongoTemplate: DEBUG
-springdoc:
-    api-docs:
-        enabled: true
-spring:
-    main:
-        banner-mode: "off"
-    application:
-        name: ${name:parking-control}
-    profiles:
-        active: ${profiles_active:local}
+  level:
     data:
-        mongodb:
-          uri: mongodb://localhost:27017/parking-control-ms
-          field-naming-strategy: org.springframework.data.mapping.model.SnakeCaseFieldNamingStrategy
-
+      mongodb:
+        core:
+          MongoTemplate: DEBUG
+springdoc:
+  api-docs:
+    enabled: true
+spring:
+  main:
+    banner-mode: "off"
+  application:
+    name: parking-control
+  data:
+    mongodb:
+      uri: ${MONGO_URI}
+      field-naming-strategy: org.springframework.data.mapping.model.SnakeCaseFieldNamingStrategy
 management:
-    endpoint:
-        health:
-            show-details: "ALWAYS"
+  endpoint:
+    health:
+      show-details: "ALWAYS"
