@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
 
     Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler({MethodArgumentNotValidException.class})
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
 
         List<ErrorObject> errors = ex.getBindingResult().getFieldErrors().stream()
@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler({HttpMessageNotReadableException.class})
+    @ExceptionHandler(HttpMessageNotReadableException.class)
     protected ResponseEntity<Object> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
 
         ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name());
@@ -44,7 +44,7 @@ public class GlobalExceptionHandler {
     }
 
 
-    @ExceptionHandler({ConflictParkingSpotException.class})
+    @ExceptionHandler(ConflictParkingSpotException.class)
     protected ResponseEntity<Object> handleConflictParkingSpot(ConflictParkingSpotException ex) {
 
         ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), HttpStatus.CONFLICT.value(), HttpStatus.CONFLICT.name());
@@ -54,7 +54,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler({ParkingSpotNotFoundException.class})
+    @ExceptionHandler(ParkingSpotNotFoundException.class)
     protected ResponseEntity<ErrorResponse> handleParkingSpotNotFound(ParkingSpotNotFoundException ex) {
 
         ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.name());

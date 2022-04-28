@@ -1,12 +1,12 @@
-package com.ms.parkingcontrol.adapters.out.parkingmanagement.database;
+package com.ms.parkingcontrol.adapters.outbound.parkingmanagement.database;
 
 import com.ms.parkingcontrol.adapters.config.ParkingSpotNotFoundException;
-import com.ms.parkingcontrol.adapters.out.parkingmanagement.ParkingSpot;
-import com.ms.parkingcontrol.adapters.out.parkingmanagement.ResearchedParkingSpot;
+import com.ms.parkingcontrol.adapters.outbound.parkingmanagement.ParkingSpot;
+import com.ms.parkingcontrol.adapters.outbound.parkingmanagement.ResearchedParkingSpot;
 import com.ms.parkingcontrol.domain.parkingmanagement.FilteredParkingSpot;
 import com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpotSearch;
-import com.ms.parkingcontrol.ports.out.parkingmanagement.MongoParkingSpotDBOperationsPortOutbound;
-import com.ms.parkingcontrol.ports.out.parkingmanagement.ParkingSpotStoreDatabasePortOutbound;
+import com.ms.parkingcontrol.ports.outbound.parkingmanagement.MongoParkingSpotDBOperationsPortOutbound;
+import com.ms.parkingcontrol.ports.outbound.parkingmanagement.ParkingSpotStoreDatabasePortOutbound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

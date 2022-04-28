@@ -1,4 +1,4 @@
-package com.ms.parkingcontrol.adapters.out.parkingmanagement;
+package com.ms.parkingcontrol.adapters.outbound.parkingmanagement;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

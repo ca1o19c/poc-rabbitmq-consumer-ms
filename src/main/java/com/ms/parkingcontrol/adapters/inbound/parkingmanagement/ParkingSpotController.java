@@ -1,4 +1,4 @@
-package com.ms.parkingcontrol.adapters.in.parkingmanagement;
+package com.ms.parkingcontrol.adapters.inbound.parkingmanagement;
 
 import com.ms.parkingcontrol.adapters.dto.PageResponse;
 import com.ms.parkingcontrol.adapters.dto.ParkingSpotRequest;
@@ -7,8 +7,8 @@ import com.ms.parkingcontrol.domain.parkingmanagement.FilteredParkingSpot;
 import com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpot;
 import com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpotSearch;
 import com.ms.parkingcontrol.domain.parkingmanagement.SortType;
-import com.ms.parkingcontrol.ports.in.parkingmanagement.ParkingSpotFacadePortInbound;
-import com.ms.parkingcontrol.ports.in.parkingmanagement.ParkingSpotPortInbound;
+import com.ms.parkingcontrol.ports.inbound.parkingmanagement.ParkingSpotFacadePortInbound;
+import com.ms.parkingcontrol.ports.inbound.parkingmanagement.ParkingSpotPortInbound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +28,6 @@ public class ParkingSpotController {
 
     @Autowired
     private ParkingSpotPortInbound parkingSpotPortInbound;
-
 
     @GetMapping
     public ResponseEntity<PageResponse<ParkingSpotResponse>> getAllParkingSpots(@RequestParam(required = false, value = "parking_spot_number") String parkingSpotNumber,

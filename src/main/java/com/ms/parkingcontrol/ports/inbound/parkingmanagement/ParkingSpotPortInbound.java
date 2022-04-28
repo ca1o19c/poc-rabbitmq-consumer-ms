@@ -1,4 +1,4 @@
-package com.ms.parkingcontrol.ports.in.parkingmanagement;
+package com.ms.parkingcontrol.ports.inbound.parkingmanagement;
 
 import com.ms.parkingcontrol.domain.parkingmanagement.FilteredParkingSpot;
 import com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpot;

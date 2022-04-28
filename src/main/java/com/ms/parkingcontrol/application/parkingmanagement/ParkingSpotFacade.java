@@ -1,8 +1,8 @@
 package com.ms.parkingcontrol.application.parkingmanagement;
 
 import com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpot;
-import com.ms.parkingcontrol.ports.in.parkingmanagement.ParkingSpotFacadePortInbound;
-import com.ms.parkingcontrol.ports.out.parkingmanagement.ParkingSpotStoreDatabasePortOutbound;
+import com.ms.parkingcontrol.ports.inbound.parkingmanagement.ParkingSpotFacadePortInbound;
+import com.ms.parkingcontrol.ports.outbound.parkingmanagement.ParkingSpotStoreDatabasePortOutbound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

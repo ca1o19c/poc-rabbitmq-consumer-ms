@@ -1,10 +1,10 @@
-package com.ms.parkingcontrol.adapters.out.parkingmanagement.database;
+package com.ms.parkingcontrol.adapters.outbound.parkingmanagement.database;
 
-import com.ms.parkingcontrol.adapters.out.parkingmanagement.ParkingSpot;
-import com.ms.parkingcontrol.adapters.out.parkingmanagement.ResearchedParkingSpot;
+import com.ms.parkingcontrol.adapters.outbound.parkingmanagement.ParkingSpot;
+import com.ms.parkingcontrol.adapters.outbound.parkingmanagement.ResearchedParkingSpot;
 import com.ms.parkingcontrol.domain.parkingmanagement.ParkingSpotSearch;
 import com.ms.parkingcontrol.domain.parkingmanagement.SortType;
-import com.ms.parkingcontrol.ports.out.parkingmanagement.MongoParkingSpotDBOperationsPortOutbound;
+import com.ms.parkingcontrol.ports.outbound.parkingmanagement.MongoParkingSpotDBOperationsPortOutbound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -24,7 +24,7 @@ import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @Component
-class MongoParkingSpotDBParkingSpotDBOperations implements MongoParkingSpotDBOperationsPortOutbound {
+class MongoParkingSpotDBOperations implements MongoParkingSpotDBOperationsPortOutbound {
 
     private static final String REGISTRATION_DATE_PROPERTY = "registration_date";
     private static final String BRAND_CAR_PROPERTY = "brand_car";
