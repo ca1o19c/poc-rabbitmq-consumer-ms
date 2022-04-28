@@ -1,4 +1,4 @@
-package com.ms.parkingcontrol.adapters.out.parkingmanagement;
+package com.ms.parkingcontrol.adapters.outbound.parkingmanagement;
 
 import java.util.List;
 
